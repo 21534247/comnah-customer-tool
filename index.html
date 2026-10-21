@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Com Nah Customer Tool</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Com Nah Restaurant</h1>
+    <h2>Customer Information And Relationship Tool</h2>
+    <p>Help staff recognise returning customer and record dining preferences.</p>
+<form>
+    <label for="customer-name">Customer name</label>
+    <input type="text" id="customer-name" name="customerName">
+    <label for="customer-phone">Phone number</label>
+    <input type="tel" id="customer-phone" name="customerPhone">
+    <label for="customer-preference">Dining preference</label>
+    <input type="text" id="customer-preference" name="customerPreference">
+    <button type="button" id="save-customer">Save customer</button>
+    <button type="reset">Clear form</button>
+</form>
+<h2>Saved customers</h2>
+<ul id="customer-list"></ul>
+<script src="script.js"></script>
+</body>
+</html>   
