@@ -55,7 +55,9 @@ function displayCustomer() {
 
     const matches = customers.filter(function (customer) {
         return customer.name.toLowerCase().includes(search) ||
-               customer.phone.includes(search);
+               (search.replace(/\D/g, "") !== "" &&
+ customer.phone.replace(/\D/g, "")
+     .includes(search.replace(/\D/g, "")));
     });
 
     if (matches.length === 0) {
