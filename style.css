@@ -47,3 +47,21 @@ button {
     font-size: 16px;
     cursor: pointer;
 }
+#customer-list {
+    list-style: none;
+    padding: 0;
+}
+
+#customer-list li {
+    background: white;
+    padding: 16px;
+    margin-bottom: 12px;
+    border: 1px solid #d5ddd7;
+    border-radius: 8px;
+}
+
+#customer-list button {
+    margin: 0 0 0 12px;
+    padding: 8px 12px;
+    font-size: 14px;
+}

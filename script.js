@@ -17,10 +17,15 @@ saveButton.addEventListener("click", function () {
         alert("Please enter a customer name and phone number.");
         return;
     }
+    if (!/^\+?[0-9 ()-]{8,20}$/.test(phone)) {
+    alert("Enter a phone number with 8–20 characters using digits, spaces, brackets or hyphens.");
+    return;
+}
 
-    const alreadyExists = customers.some(function (savedCustomer) {
-        return savedCustomer.phone === phone;
-    });
+   const alreadyExists = customers.some(function (savedCustomer) {
+    return savedCustomer.phone.replace(/\D/g, "") ===
+           phone.replace(/\D/g, "");
+});
 
     if (alreadyExists) {
         alert("A customer with this phone number already exists.");
