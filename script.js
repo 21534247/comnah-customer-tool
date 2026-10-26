@@ -23,6 +23,14 @@ saveButton.addEventListener("click", function () {
         phone: phone,
         preference: preference
     };
+    const alreadyExists = customers.some(function (savedCustomer) {
+    return savedCustomer.phone === phone;
+});
+
+if (alreadyExists) {
+    alert("A customer with this phone number already exists.");
+    return;
+}
 
     customers.push(customer);
     localStorage.setItem("customers", JSON.stringify(customers));
@@ -42,6 +50,12 @@ function displayCustomer() {
         return customer.name.toLowerCase().includes(search) ||
                customer.phone.includes(search);
     });
+    if (matches.length === 0) {
+    const message = document.createElement("li");
+    message.textContent = "No customers found.";
+    list.appendChild(message);
+    return;
+}
 
     matches.forEach(function (customer) {
         const item = document.createElement("li");
