@@ -18,19 +18,20 @@ saveButton.addEventListener("click", function () {
         return;
     }
 
+    const alreadyExists = customers.some(function (savedCustomer) {
+        return savedCustomer.phone === phone;
+    });
+
+    if (alreadyExists) {
+        alert("A customer with this phone number already exists.");
+        return;
+    }
+
     const customer = {
         name: customerName,
         phone: phone,
         preference: preference
     };
-    const alreadyExists = customers.some(function (savedCustomer) {
-    return savedCustomer.phone === phone;
-});
-
-if (alreadyExists) {
-    alert("A customer with this phone number already exists.");
-    return;
-}
 
     customers.push(customer);
     localStorage.setItem("customers", JSON.stringify(customers));
@@ -39,6 +40,7 @@ if (alreadyExists) {
     document.querySelector("form").reset();
     alert("Customer saved.");
 });
+
 function displayCustomer() {
     const list = document.getElementById("customer-list");
     list.textContent = "";
@@ -50,12 +52,13 @@ function displayCustomer() {
         return customer.name.toLowerCase().includes(search) ||
                customer.phone.includes(search);
     });
+
     if (matches.length === 0) {
-    const message = document.createElement("li");
-    message.textContent = "No customers found.";
-    list.appendChild(message);
-    return;
-}
+        const message = document.createElement("li");
+        message.textContent = "No customers found.";
+        list.appendChild(message);
+        return;
+    }
 
     matches.forEach(function (customer) {
         const item = document.createElement("li");
@@ -63,8 +66,33 @@ function displayCustomer() {
         item.textContent =
             customer.name + " | " +
             customer.phone + " | " +
-            customer.preference;
+            customer.preference + " ";
 
+        const editButton = document.createElement("button");
+        editButton.type = "button";
+        editButton.textContent = "Edit preference";
+
+        editButton.addEventListener("click", function () {
+            const updatedPreference = prompt(
+                "Enter the new dining preference:",
+                customer.preference
+            );
+
+            if (updatedPreference === null) {
+                return;
+            }
+
+            customer.preference = updatedPreference.trim();
+
+            localStorage.setItem(
+                "customers",
+                JSON.stringify(customers)
+            );
+
+            displayCustomer();
+        });
+
+        item.appendChild(editButton);
         list.appendChild(item);
     });
 }
