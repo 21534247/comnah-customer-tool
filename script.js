@@ -32,11 +32,12 @@ saveButton.addEventListener("click", function () {
         return;
     }
 
-    const customer = {
-        name: customerName,
-        phone: phone,
-        preference: preference
-    };
+   const customer = {
+    name: customerName,
+    phone: phone,
+    preference: preference,
+    type: document.getElementById("customer-type").value
+    }; 
 
     customers.push(customer);
     localStorage.setItem("customers", JSON.stringify(customers));
@@ -53,12 +54,23 @@ function displayCustomer() {
     const search = document.getElementById("customer-search")
         .value.trim().toLowerCase();
 
-    const matches = customers.filter(function (customer) {
-        return customer.name.toLowerCase().includes(search) ||
-               (search.replace(/\D/g, "") !== "" &&
- customer.phone.replace(/\D/g, "")
-     .includes(search.replace(/\D/g, "")));
-    });
+    const selectedType =
+    document.getElementById("customer-type-filter").value;
+
+const matches = customers.filter(function (customer) {
+    const phoneSearch = search.replace(/\D/g, "");
+
+    const matchesSearch =
+        customer.name.toLowerCase().includes(search) ||
+        (phoneSearch !== "" &&
+            customer.phone.replace(/\D/g, "").includes(phoneSearch));
+
+    const matchesType =
+        selectedType === "All" ||
+        (customer.type || "Unclassified") === selectedType;
+
+    return matchesSearch && matchesType;
+});
 
     if (matches.length === 0) {
         const message = document.createElement("li");
@@ -71,9 +83,10 @@ function displayCustomer() {
         const item = document.createElement("li");
 
         item.textContent =
-            customer.name + " | " +
-            customer.phone + " | " +
-            customer.preference + " ";
+    customer.name + " | " +
+    customer.phone + " | " +
+    customer.preference + " | " +
+    (customer.type || "Unclassified");
 
         const editButton = document.createElement("button");
         editButton.type = "button";
@@ -108,5 +121,9 @@ displayCustomer();
 
 document.getElementById("customer-search")
     .addEventListener("input", function () {
+        displayCustomer();
+    });
+ document.getElementById("customer-type-filter")
+    .addEventListener("change", function () {
         displayCustomer();
     });

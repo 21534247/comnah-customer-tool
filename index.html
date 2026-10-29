@@ -17,6 +17,11 @@
     <input type="tel" id="customer-phone" name="customerPhone">
     <label for="customer-preference">Dining preference</label>
     <input type="text" id="customer-preference" name="customerPreference">
+    <label for="customer-type">Customer type</label>
+    <select id="customer-type" name="customerType">
+        <option value="Casual">Casual</option>
+        <option value="VIP">VIP</option>
+    </select>
     <button type="button" id="save-customer">Save customer</button>
     <button type="reset">Clear form</button>
 </form>
@@ -24,6 +29,13 @@
 <label for="customer-search">Search by name or phone</label>
 <input type="search" id="customer-search"
        placeholder="Enter a name or phone number">
+       <label for="customer-type-filter">Filter by customer type</label>
+<select id="customer-type-filter">
+    <option value="All">All customers</option>
+    <option value="VIP">VIP</option>
+    <option value="Casual">Casual</option>
+    <option value="Unclassified">Unclassified</option>
+</select>
 <ul id="customer-list"></ul>
 <script src="script.js"></script>
 </body>
