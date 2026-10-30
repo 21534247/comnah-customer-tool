@@ -1,67 +1,185 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
     font-family: Arial, sans-serif;
-    background-color: #f5f3eb;
+    background:
+        radial-gradient(circle at top right, #dce8d8, transparent 45%),
+        linear-gradient(135deg, #faf7ef, #eee9db);
     color: #263b31;
-    padding: 40px;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 48px 24px;
+    min-height: 100vh;
 }
 
 h1 {
     color: #24543c;
-    font-size: 36px;
+    font-family: Georgia, serif;
+    font-size: clamp(34px, 6vw, 52px);
+    margin: 0 0 12px;
 }
 
 h2 {
+    color: #24543c;
     font-size: 24px;
+    margin-top: 36px;
+}
+
+body > h2:first-of-type {
+    margin-top: 0;
+    font-size: 21px;
+    font-weight: normal;
 }
 
 p {
-    font-size: 18px;
-    line-height: 1.6;
+    font-size: 17px;
+    line-height: 1.7;
 }
+
+form,
+section {
+    background: #ffffff;
+    border: 1px solid #dce3d9;
+    border-radius: 18px;
+    padding: 28px;
+    margin-top: 28px;
+    box-shadow: 0 8px 28px rgba(36, 84, 60, 0.08);
+}
+
 form {
-    max-width: 400px;
-    margin-top: 30px;
+    max-width: 620px;
+    border-top: 5px solid #b68b47;
+}
+
+section h2 {
+    margin-top: 0;
 }
 
 label {
     display: block;
-    margin-top: 15px;
-    margin-bottom: 6px;
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 18px;
+    margin-bottom: 8px;
 }
 
-input {
-    box-sizing: border-box;
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #999;
-    border-radius: 6px;
-    font-size: 16px;
+form label:first-child {
+    margin-top: 0;
 }
+
+input,
+select {
+    display: block;
+    width: 100%;
+    padding: 13px 14px;
+    border: 1px solid #b7c4b9;
+    border-radius: 9px;
+    background-color: #fff;
+    color: #263b31;
+    font: inherit;
+    min-height: 46px;
+}
+
+input::placeholder {
+    color: #68766c;
+}
+
+input:focus,
+select:focus {
+    border-color: #24543c;
+    outline: 3px solid #dcebdc;
+    outline-offset: 2px;
+}
+
 button {
-    margin-top: 20px;
-    padding: 12px 20px;
+    margin-top: 22px;
+    padding: 13px 22px;
     background-color: #24543c;
     color: white;
-    border: none;
-    border-radius: 6px;
-    font-size: 16px;
+    border: 1px solid #24543c;
+    border-radius: 9px;
+    font: inherit;
+    font-weight: bold;
     cursor: pointer;
+    transition: background-color 0.2s ease;
 }
+
+button:hover {
+    background-color: #173d2a;
+}
+
+button:focus-visible {
+    outline: 3px solid #b68b47;
+    outline-offset: 3px;
+}
+
+button[type="reset"] {
+    background-color: #fff;
+    color: #24543c;
+    margin-left: 8px;
+}
+
+button[type="reset"]:hover {
+    background-color: #edf3ec;
+}
+
+#customer-search,
+#customer-type-filter {
+    max-width: 620px;
+}
+
 #customer-list {
     list-style: none;
     padding: 0;
+    margin-top: 24px;
 }
 
 #customer-list li {
-    background: white;
-    padding: 16px;
-    margin-bottom: 12px;
+    background: #fff;
+    padding: 22px;
+    margin-bottom: 14px;
     border: 1px solid #d5ddd7;
-    border-radius: 8px;
+    border-left: 5px solid #b68b47;
+    border-radius: 12px;
+    line-height: 1.6;
+}
+    /* Soft leaves and flowers on the cream background */
+body {
+    background-color: #f5f3eb;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='360' height='360' viewBox='0 0 360 360'%3E%3Cg opacity='.18'%3E%3Cpath d='M25 130Q65 85 80 25M260 340Q280 280 335 245' fill='none' stroke='%23718d65' stroke-width='2'/%3E%3Cg fill='%238ca77d'%3E%3Cellipse cx='42' cy='101' rx='10' ry='23' transform='rotate(-45 42 101)'/%3E%3Cellipse cx='67' cy='78' rx='10' ry='23' transform='rotate(35 67 78)'/%3E%3Cellipse cx='70' cy='42' rx='8' ry='19' transform='rotate(-35 70 42)'/%3E%3Cellipse cx='277' cy='305' rx='10' ry='23' transform='rotate(-40 277 305)'/%3E%3Cellipse cx='307' cy='278' rx='10' ry='23' transform='rotate(40 307 278)'/%3E%3C/g%3E%3Cg fill='%23c58c83'%3E%3Ccircle cx='185' cy='175' r='7'/%3E%3Ccircle cx='198' cy='175' r='7'/%3E%3Ccircle cx='181' cy='187' r='7'/%3E%3Ccircle cx='202' cy='187' r='7'/%3E%3Ccircle cx='192' cy='195' r='7'/%3E%3C/g%3E%3Ccircle cx='192' cy='184' r='5' fill='%23b99a50'/%3E%3C/g%3E%3C/svg%3E");
+    background-repeat: repeat;
 }
 
-#customer-list button {
-    margin: 0 0 0 12px;
-    padding: 8px 12px;
-    font-size: 14px;
+/* Keep the form clear against the pattern */
+form {
+    background-color: #fffdf8;
+    padding: 24px;
+    border: 1px solid #d5ddd7;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(38, 59, 49, 0.08);
+    box-sizing: border-box;
+    width: 100%;
+}
+
+/* Give the booking section its own card */
+section {
+    background-color: #fffdf8;
+    padding: 24px;
+    margin-top: 30px;
+    border: 1px solid #d5ddd7;
+    border-radius: 16px;
+}
+
+/* Comfortable spacing on smaller screens */
+@media (max-width: 600px) {
+    body {
+        padding: 16px;
+    }
+
+    form,
+    section {
+        padding: 18px;
+    }
 }
