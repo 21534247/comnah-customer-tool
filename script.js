@@ -1,5 +1,12 @@
 const customers =
     JSON.parse(localStorage.getItem("customers")) || [];
+    customers.forEach(function (customer) {
+    if (customer.type === "Casual") {
+        customer.type = "Regular";
+    }
+});
+
+localStorage.setItem("customers", JSON.stringify(customers));
 
 const saveButton = document.getElementById("save-customer");
 
@@ -152,3 +159,37 @@ document.getElementById("customer-search")
     .addEventListener("change", function () {
         displayCustomer();
     });
+    const bookingGuests = document.getElementById("booking-guests");
+const bookingTime = document.getElementById("booking-time");
+const bookingNotice = document.getElementById("booking-notice");
+
+let warningShowing = false;
+
+function checkBookingEnquiry() {
+    const guests = Number(bookingGuests.value);
+    const time = bookingTime.value;
+
+    const largeGroup = Number.isInteger(guests) && guests >= 8;
+    const lateBooking = time !== "" && time >= "20:00";
+
+    const needsCall = largeGroup || lateBooking;
+
+    if (needsCall) {
+        bookingNotice.textContent =
+            "Please call the restaurant for groups of 8 or more " +
+            "or times from 8:00 PM. This does not confirm a booking.";
+
+        if (!warningShowing) {
+            alert(bookingNotice.textContent);
+        }
+    } else {
+        bookingNotice.textContent =
+            "Please contact the restaurant about large-group " +
+            "or late bookings. This does not confirm a booking.";
+    }
+
+    warningShowing = needsCall;
+}
+
+bookingGuests.addEventListener("input", checkBookingEnquiry);
+bookingTime.addEventListener("input", checkBookingEnquiry);
