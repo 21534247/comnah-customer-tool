@@ -17,10 +17,11 @@ saveButton.addEventListener("click", function () {
         alert("Please enter a customer name and phone number.");
         return;
     }
-    if (!/^\+?[0-9 ()-]{8,20}$/.test(phone)) {
+    if (!/^\+?[0-9 ()-]{8,20}$/.test(phone) ||
+    phone.replace(/\D/g, "").length < 8) {
     alert("Enter a phone number with 8–20 characters using digits, spaces, brackets or hyphens.");
     return;
-}
+    }
 
    const alreadyExists = customers.some(function (savedCustomer) {
     return savedCustomer.phone.replace(/\D/g, "") ===
@@ -36,8 +37,9 @@ saveButton.addEventListener("click", function () {
     name: customerName,
     phone: phone,
     preference: preference,
-    type: document.getElementById("customer-type").value
-    }; 
+    type: document.getElementById("customer-type").value,
+    marketing: document.getElementById("customer-marketing").value
+};
 
     customers.push(customer);
     localStorage.setItem("customers", JSON.stringify(customers));
@@ -82,11 +84,12 @@ const matches = customers.filter(function (customer) {
     matches.forEach(function (customer) {
         const item = document.createElement("li");
 
-        item.textContent =
+       item.textContent =
     customer.name + " | " +
     customer.phone + " | " +
     customer.preference + " | " +
-    (customer.type || "Unclassified");
+    (customer.type || "Unclassified") + " | " +
+    "Marketing: " + (customer.marketing || "Not asked");
 
         const editButton = document.createElement("button");
         editButton.type = "button";
@@ -113,6 +116,28 @@ const matches = customers.filter(function (customer) {
         });
 
         item.appendChild(editButton);
+        const marketingSelect = document.createElement("select");
+marketingSelect.setAttribute(
+    "aria-label",
+    "Marketing preference for " + customer.name
+);
+
+["Not asked", "Opted out", "Opted in"].forEach(function (choice) {
+    const option = document.createElement("option");
+    option.value = choice;
+    option.textContent = "Marketing: " + choice;
+    marketingSelect.appendChild(option);
+});
+
+marketingSelect.value = customer.marketing || "Not asked";
+
+marketingSelect.addEventListener("change", function () {
+    customer.marketing = marketingSelect.value;
+    localStorage.setItem("customers", JSON.stringify(customers));
+    displayCustomer();
+});
+
+item.appendChild(marketingSelect);
         list.appendChild(item);
     });
 }
