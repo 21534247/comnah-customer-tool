@@ -45,7 +45,9 @@ saveButton.addEventListener("click", function () {
     phone: phone,
     preference: preference,
     type: document.getElementById("customer-type").value,
-    marketing: document.getElementById("customer-marketing").value
+    marketing: document.getElementById("marketing-opt-out").checked
+    ? "Opted out"
+    : "Not asked"
 };
 
     customers.push(customer);

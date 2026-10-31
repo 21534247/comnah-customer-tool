@@ -22,12 +22,11 @@
         <option value="Regular">Regular</option>
         <option value="VIP">VIP</option>
     </select>
-    <label for="customer-marketing">Marketing preference</label>
-    <select id="customer-marketing" name="customerMarketing">
-    <option value="Not asked">Not asked</option>
-    <option value="Opted out">Opted out — no marketing</option>
-    <option value="Opted in">Opted in — marketing allowed</option>
-    </select>
+    
+    <label class="consent-option">
+    <input type="checkbox" id="marketing-opt-out">
+    Do not send me marketing messages.
+    </label>
     <button type="button" id="save-customer">Save customer</button>
     <button type="reset">Clear form</button>
 </form>
