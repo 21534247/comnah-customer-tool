@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cơm Nhà | Staff Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main>
+        <h1>Cơm Nhà Restaurant</h1>
+        <h2>Staff Login</h2>
+        <p>Sign in to continue to the staff dashboard.</p>
+
+        <form id="staff-login-form">
+            <label for="staff-id">Staff ID</label>
+            <input
+                type="text"
+                id="staff-id"
+                inputmode="numeric"
+                autocomplete="username"
+                placeholder="Enter your staff ID"
+                required
+            >
+
+            <label for="staff-password">Password</label>
+            <input
+                type="password"
+                id="staff-password"
+                autocomplete="current-password"
+                placeholder="Enter your password"
+                required
+            >
+
+            <button type="submit">Sign in</button>
+
+            <p id="login-message" role="alert"></p>
+        </form>
+    </main>
+
+    <script>
+        // Demonstration only: these details are visible in browser code.
+        const staffMembers = {
+            "9001": "Sajid",
+            "9002": "Nav",
+            "9003": "Himanshu",
+            "9004": "Easin",
+            "9005": "Akshat"
+        };
+
+        // Replace this with the normal Airtable dashboard URL.
+        const dashboardUrl = "https://airtable.com/appjAmiS2pFulgXQO/pag5YdsKnGUdGKH57";
+
+        const loginForm = document.getElementById("staff-login-form");
+        const loginMessage = document.getElementById("login-message");
+
+        loginForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const staffId =
+                document.getElementById("staff-id").value.trim();
+
+            const password =
+                document.getElementById("staff-password").value;
+
+            const validStaff =
+                Object.prototype.hasOwnProperty.call(staffMembers, staffId);
+
+            if (!validStaff || password !== "comnha123") {
+                loginMessage.textContent =
+                    "Staff ID or password is incorrect. Please try again.";
+                return;
+            }
+
+            if (dashboardUrl === "") {
+                loginMessage.textContent =
+                    "Login details accepted. The dashboard link still needs to be added.";
+                return;
+            }
+
+            window.location.assign(dashboardUrl);
+        });
+    </script>
+</body>
+</html>
